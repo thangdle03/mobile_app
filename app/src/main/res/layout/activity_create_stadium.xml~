@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="370dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="25dp"
+    android:background="@drawable/bg_popup"
+    android:gravity="center"
+    android:id="@+id/main"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/tv_stadium_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:fontFamily="@font/baloo"
+            android:textSize="25sp"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="16dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/camp_nou"
+            android:layout_marginBottom="25dp"/>
+
+        <EditText
+            android:id="@+id/et_stadium_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên sân"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:background="@drawable/bg_textfield"
+            android:padding="10dp"
+            android:fontFamily="@font/baloo"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="10dp" />
+
+        <EditText
+            android:id="@+id/et_stadium_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Loại sân"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:background="@drawable/bg_textfield"
+            android:padding="10dp"
+            android:fontFamily="@font/baloo"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="10dp" />
+
+        <EditText
+            android:id="@+id/et_stadium_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Vị trí"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:background="@drawable/bg_textfield"
+            android:padding="10dp"
+            android:fontFamily="@font/baloo"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="10dp" />
+
+        <EditText
+            android:id="@+id/et_stadium_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phí đặt sân"
+            android:textSize="18sp"
+            android:inputType="number"
+            android:background="@drawable/bg_textfield"
+            android:padding="10dp"
+            android:fontFamily="@font/baloo"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="15dp"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hủy"
+            android:fontFamily="@font/baloo"
+            android:textSize="16sp"
+            android:backgroundTint="#696969"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Lưu"
+            android:fontFamily="@font/baloo"
+            android:textSize="16sp"
+            android:backgroundTint="#588DFF"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
+
+</LinearLayout>

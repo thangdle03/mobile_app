@@ -1,0 +1,8 @@
+<!-- res/drawable/ic_schedule_scaled.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="60dp"
+    android:height="60dp">
+<path
+android:fillColor="@color/black"
+android:pathData="@drawable/ic_s" />
+    </vector>

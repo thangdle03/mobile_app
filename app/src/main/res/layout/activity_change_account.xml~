@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    android:padding="30dp"
+    android:background="@drawable/bg_popup"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center">
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nhập mật khẩu hiện tại"
+        android:textSize="25sp"
+        android:fontFamily="@font/baloo"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:padding="20dp"/>
+
+
+    <EditText
+        android:id="@+id/password_current"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:inputType="textPassword"
+        android:background="@drawable/bg_textfield"
+        android:padding="15dp"
+        android:fontFamily="@font/baloo"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="10dp" />
+
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="2"
+        android:layout_marginTop="8dp">
+
+        <!-- Nút Hủy -->
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hủy"
+            android:fontFamily="@font/baloo"
+            android:textSize="16sp"
+            android:backgroundTint="#696969"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp" />
+
+        <!-- Nút Lưu -->
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Lưu"
+            android:fontFamily="@font/baloo"
+            android:textSize="16sp"
+            android:backgroundTint="#588DFF"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
+
+</LinearLayout>

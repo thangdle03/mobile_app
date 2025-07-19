@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AccountActivity"
+    android:background= "#197321">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background=" @android:color/transparent"
+            android:fontFamily="@font/baloo"
+            android:padding="10dp"
+            android:gravity="start"
+            android:text="Đăng xuất"
+            android:textSize="30sp"
+            android:textColor="#140101"/>
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background=" @android:color/transparent"
+            android:fontFamily="@font/baloo"
+            android:padding="10dp"
+            android:gravity="end"
+            android:text="Lưu"
+            android:layout_weight="1"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/circular_shape"
+            android:src="@drawable/ic_account"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/rounded_background"
+            android:padding="20dp"
+            android:text="Họ và Tên"
+            android:inputType="textPersonName"
+            android:fontFamily="@font/baloo"
+            android:textColorHint="#696969"
+            android:textSize="20sp"
+            android:layout_margin="10dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/rounded_background"
+            android:padding="20dp"
+            android:text="Email"
+            android:inputType="textEmailAddress"
+            android:fontFamily="@font/baloo"
+            android:textColorHint="#696969"
+            android:textSize="20sp"
+            android:layout_margin="10dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/rounded_background"
+            android:padding="20dp"
+            android:text="Số điện thoại"
+            android:inputType="phone"
+            android:fontFamily="@font/baloo"
+            android:textColorHint="#696969"
+            android:textSize="20sp"
+            android:layout_margin="10dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/rounded_background"
+            android:padding="20dp"
+            android:hint="Mật khẩu mới"
+            android:inputType="textPassword"
+            android:fontFamily="@font/baloo"
+            android:textColorHint="#696969"
+            android:textSize="20sp"
+            android:layout_margin="10dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/rounded_background"
+            android:padding="20dp"
+            android:hint="Xác nhận mật khẩu mới"
+            android:inputType="textPassword"
+            android:fontFamily="@font/baloo"
+            android:textColorHint="#696969"
+            android:textSize="20sp"
+            android:layout_margin="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/baloo"
+            android:layout_weight="1"
+            android:text="Trang chủ"
+            android:textSize="15sp"
+            app:icon="@drawable/ic_home"
+            app:iconGravity="top"
+            app:iconSize="35dp"
+            app:iconTint="@color/white" />
+
+        <Button
+            android:id="@+id/btn_account"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/baloo"
+            android:gravity="center"
+            android:text="Tài khoản"
+            android:textSize="15sp"
+            app:icon="@drawable/ic_account"
+            app:iconGravity="top"
+            app:iconSize="35dp"
+            app:iconTint="@color/white" />
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

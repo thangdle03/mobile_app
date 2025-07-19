@@ -1,0 +1,132 @@
+package com.example.admin_stadium;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class StadiumDetailActivity extends DialogFragment {
+
+    private static final String ARG_NAME = "name";
+    private static final String ARG_TYPE = "type";
+    private static final String ARG_LOCATION = "location";
+    private static final String ARG_PRICE = "price";
+
+    private DatabaseReference stadiumRef;
+
+    public static StadiumDetailActivity newInstance(String stadiumId, String name, String type, String location, Double price) {
+        StadiumDetailActivity fragment = new StadiumDetailActivity();
+        Bundle args = new Bundle();
+        args.putString("id", stadiumId); // Truyền key tự động
+        args.putString("name", name);
+        args.putString("type", type);
+        args.putString("location", location);
+        args.putDouble("price", price);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_stadium_detail, container, false);
+
+        TextView tvTitle = view.findViewById(R.id.title_stadium_name);
+        EditText etName = view.findViewById(R.id.stadium_name);
+        EditText etType = view.findViewById(R.id.stadium_type);
+        EditText etLocation = view.findViewById(R.id.stadium_location);
+        EditText etPrice = view.findViewById(R.id.stadium_price);
+
+        if (getArguments() != null) {
+            tvTitle.setText(getArguments().getString(ARG_NAME));
+            etName.setText(getArguments().getString(ARG_NAME));
+            etType.setText(getArguments().getString(ARG_TYPE));
+            etLocation.setText(getArguments().getString(ARG_LOCATION));
+            etPrice.setText(String.valueOf(getArguments().getDouble(ARG_PRICE)));
+        }
+
+        stadiumRef = FirebaseDatabase.getInstance("https://user-stadium-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("stadiums");
+
+        Button btnDelete = view.findViewById(R.id.btn_delete);
+        Button btnCancel = view.findViewById(R.id.btn_cancel);
+        Button btnSave = view.findViewById(R.id.btn_save);
+
+        btnDelete.setOnClickListener(v -> {
+            String stadiumId = getArguments().getString("id"); // Lấy key tự động từ arguments
+            if (stadiumId != null) {
+                stadiumRef.child(stadiumId).removeValue()
+                        .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(getActivity(), "Sân đã được xóa thành công", Toast.LENGTH_SHORT).show();
+                            dismiss();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(getActivity(), "Xóa thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
+            } else {
+                Toast.makeText(getActivity(), "Không tìm thấy ID sân để xóa", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        btnCancel.setOnClickListener(v -> dismiss());
+
+        btnSave.setOnClickListener(v -> {
+            String name = etName.getText().toString();
+            String type = etType.getText().toString();
+            String location = etLocation.getText().toString();
+            Double price = Double.valueOf(etPrice.getText().toString().replace(",", ""));
+
+            stadiumRef.child(getArguments().getString(ARG_NAME)).updateChildren(new Stadium(name, type, location, price).toMap())
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(getActivity(), "Thông tin sân đã được cập nhật", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(getActivity(), "Cập nhật thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+        });
+
+        return view;
+    }
+
+    public static class Stadium {
+        public String name;
+        public String type;
+        public String location;
+        public Double price;
+
+        public Stadium() {
+        }
+
+        public Stadium(String name, String type, String location, Double price) {
+            this.name = name;
+            this.type = type;
+            this.location = location;
+            this.price = price;
+        }
+
+        public Map<String, Object> toMap() {
+            HashMap<String, Object> result = new HashMap<>();
+            result.put("name", name);
+            result.put("type", type);
+            result.put("location", location);
+            result.put("price", price);
+            return result;
+        }
+    }
+}

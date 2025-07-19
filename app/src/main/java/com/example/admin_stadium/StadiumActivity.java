@@ -1,0 +1,104 @@
+package com.example.admin_stadium;
+
+import android.os.Bundle;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+public class StadiumActivity extends AppCompatActivity {
+
+    private LinearLayout listStadium;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_stadium);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        listStadium = findViewById(R.id.list_stadium);
+
+        ImageButton btnBack = findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(v -> finish());
+
+        ImageButton btnAdd = findViewById(R.id.btn_add);
+        btnAdd.setOnClickListener(v -> showCreateStadium());
+
+        // Initialize Firebase
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://user-stadium-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        DatabaseReference myRef = database.getReference("stadiums");
+
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Clear existing views
+                listStadium.removeAllViews();
+
+                // Iterate through all children
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String stadiumId = snapshot.getKey(); // Lấy key tự động
+                    String name = snapshot.child("name").getValue(String.class);
+                    String location = snapshot.child("location").getValue(String.class);
+                    Double price = snapshot.child("price").getValue(Double.class);
+                    String type = snapshot.child("type").getValue(String.class);
+                    addStadiumCard(stadiumId, name, location, price, type);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+    }
+
+    private void addStadiumCard(String stadiumId, String name, String location, Double price, String type) {
+        CardView cardView = (CardView) getLayoutInflater().inflate(R.layout.stadium_card, listStadium, false);
+        TextView tvName = cardView.findViewById(R.id.stadium_name);
+        TextView tvLocation = cardView.findViewById(R.id.stadium_location);
+        TextView tvPrice = cardView.findViewById(R.id.stadium_price);
+        TextView tvType = cardView.findViewById(R.id.stadium_type);
+
+        tvName.setText("Tên sân: " + name);
+        tvType.setText("Loại sân: " + type);
+        tvLocation.setText("Vị trí: " + location);
+        tvPrice.setText("Giá: " + String.format("%,.0f", price) + " VNĐ");
+
+        listStadium.addView(cardView);
+
+        // Truyền key khi mở màn hình chi tiết
+        cardView.setOnClickListener(v -> {
+            StadiumDetailActivity dialogFragment = StadiumDetailActivity.newInstance(
+                    stadiumId, name, type, location, price
+            );
+            dialogFragment.show(getSupportFragmentManager(), "stadiumDetail");
+        });
+
+    }
+
+
+    private void showCreateStadium() {
+        // Hiển thị DialogFragment
+        CreateStadium dialogFragment = new CreateStadium();
+        dialogFragment.show(getSupportFragmentManager(), "createStadium");
+    }
+}

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1063086205588",
+    "project_id": "user-stadium",
+    "storage_bucket": "user-stadium.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063086205588:android:ac7c48d5bc269731be6281",
+        "android_client_info": {
+          "package_name": "com.example.admin_stadium"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiXmR4sOpT3usV2aAX6hdL3j2oCkU8WuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063086205588:android:0c16f54678356727be6281",
+        "android_client_info": {
+          "package_name": "com.example.userstadium"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiXmR4sOpT3usV2aAX6hdL3j2oCkU8WuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

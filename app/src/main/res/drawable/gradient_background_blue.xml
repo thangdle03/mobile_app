@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="270"
+        android:startColor="#1DB26A"
+        android:endColor="#30709D"
+        android:type="linear" />
+    <corners android:radius="25dp" /> <!-- Bo góc 15dp -->
+</shape>
+

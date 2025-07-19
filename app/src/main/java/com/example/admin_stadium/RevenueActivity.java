@@ -1,0 +1,106 @@
+package com.example.admin_stadium;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class RevenueActivity extends AppCompatActivity {
+
+    // Dữ liệu xValues là các ngày trong tuần
+    private List<String> xValues = Arrays.asList("24/11", "25/11", "26/11", "27/11", "28/11", "29/11", "30/11");
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_revenue);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        // Tìm BarChart trong layout
+        BarChart barChart = findViewById(R.id.barChart);
+        barChart.getAxisRight().setDrawLabels(false);
+
+        // Dữ liệu doanh thu
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        barEntries.add(new BarEntry(0, 180000f)); // 24/11
+        barEntries.add(new BarEntry(1, 400000f)); // 25/11
+        barEntries.add(new BarEntry(2, 900000f)); // 26/11
+        barEntries.add(new BarEntry(3, 300000f)); // 27/11
+        barEntries.add(new BarEntry(4, 0f));      // 28/11
+        barEntries.add(new BarEntry(5, 180000f)); // 29/11
+        barEntries.add(new BarEntry(6, 300000f)); // 30/11
+
+        // Cấu hình trục Y
+        YAxis yAxis = barChart.getAxisLeft();
+        yAxis.setAxisMinimum(0f); // Giá trị nhỏ nhất trên trục Y
+        yAxis.setAxisMaximum(1000000f); // Giá trị lớn nhất trên trục Y
+        yAxis.setAxisLineWidth(2f); // Độ dày của trục Y
+        yAxis.setAxisLineColor(Color.BLACK); // Màu của trục Y
+        yAxis.setLabelCount(6); // Hiển thị 6 nhãn trên trục Y
+        yAxis.setTextSize(14f); // Tăng kích thước chữ
+        yAxis.setDrawGridLines(false); // Tắt lưới
+        yAxis.setTypeface(Typeface.DEFAULT_BOLD);
+
+        // Cấu hình dữ liệu BarChart
+        BarDataSet barDataSet = new BarDataSet(barEntries, "Revenue");
+        barDataSet.setColor(Color.parseColor("#1DB26A")); // Màu xanh lá cây
+        barDataSet.setValueTextColor(Color.BLACK); // Màu của giá trị
+        barDataSet.setValueTextSize(12f); // Tăng kích thước chữ giá trị
+        barDataSet.setValueTypeface(Typeface.DEFAULT_BOLD);
+
+        BarData barData = new BarData(barDataSet);
+        barData.setBarWidth(0.9f); // Độ rộng của cột
+        barChart.setData(barData);
+
+        // Vô hiệu hóa mô tả
+        barChart.getDescription().setEnabled(false);
+        barChart.setFitBars(true); // Căn chỉnh cột
+        barChart.invalidate(); // Làm mới giao diện
+
+        // Cấu hình trục X
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setAxisLineColor(Color.BLACK); // Màu của trục Y
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(xValues)); // Gán nhãn cho trục X
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // Vị trí của trục X
+        xAxis.setGranularity(1f); // Khoảng cách giữa các giá trị
+        xAxis.setGranularityEnabled(true);
+        xAxis.setAxisLineWidth(2f);
+        yAxis.setTextSize(13f);
+        xAxis.setDrawGridLines(false);
+        xAxis.setTypeface(Typeface.DEFAULT_BOLD);// Tắt lưới
+
+        ImageButton btnBack = findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(RevenueActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+}
